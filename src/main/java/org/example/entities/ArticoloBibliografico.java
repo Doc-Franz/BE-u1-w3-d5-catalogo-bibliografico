@@ -2,19 +2,28 @@ package org.example.entities;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "articoli_bibliografici")
+import java.util.ArrayList;
+import java.util.List;
 
-public class ArticoloBibliografico {
+@Entity
+@Table(name = "catalogo")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "articolo_bibliografico")
+
+public abstract class ArticoloBibliografico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private static long id;
+    private long id;
     @Column(unique = true)
     private String isbn;
+    @Column(nullable = false)
     private String titolo;
     private int annoDiPubblicazione;
     private int numeroPagine;
+
+    @OneToMany(mappedBy = "elementoPrestato") // lo stesso articolo può essere soggetto a diversi prestiti
+    private List<Prestito> listaPrestiti;
 
     public ArticoloBibliografico() {};
 
@@ -23,14 +32,15 @@ public class ArticoloBibliografico {
         this.titolo = titolo;
         this.annoDiPubblicazione = annoDiPubblicazione;
         this.numeroPagine = numeroPagine;
+        this.listaPrestiti = new ArrayList<>();
     }
 
-    public static long getId() {
+    public long getId() {
         return id;
     }
 
-    public static void setId(long id) {
-        ArticoloBibliografico.id = id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getIsbn() {
@@ -65,13 +75,23 @@ public class ArticoloBibliografico {
         this.numeroPagine = numeroPagine;
     }
 
+    public List<Prestito> getListaPrestiti() {
+        return listaPrestiti;
+    }
+
+    public void setListaPrestiti(List<Prestito> listaPrestiti) {
+        this.listaPrestiti = listaPrestiti;
+    }
+
     @Override
     public String toString() {
         return "ArticoloBibliografico{" +
-                "isbn='" + isbn + '\'' +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
                 ", titolo='" + titolo + '\'' +
                 ", annoDiPubblicazione=" + annoDiPubblicazione +
                 ", numeroPagine=" + numeroPagine +
+                ", listaPrestiti=" + listaPrestiti +
                 '}';
     }
 }
