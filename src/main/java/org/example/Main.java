@@ -30,16 +30,16 @@ public class Main
     public static void main( String[] args ) {
 
     // Aggiungi elementi al catalogo
-    //addLibro();
-    //addRivista();
+    addLibro();
+    addRivista();
 
     // Aggiungi utenti
-    //addUtente();
+    addUtente();
 
     // Aggiungi prestiti
-    //addPrestito(2, 4);
-    //addPrestito(4, 1);
-    //addPrestito(3, 7);
+    addPrestito(2, 4);
+    addPrestito(4, 1);
+    addPrestito(3, 7);
         // addPrestito(2, 2);
 
     // Rimuovi elementi per ID
