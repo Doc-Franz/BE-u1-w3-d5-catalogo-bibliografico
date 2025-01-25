@@ -30,6 +30,8 @@ public class Rivista extends ArticoloBibliografico {
     @Override
     public String toString() {
         return "Rivista{" +
+                "titolo='" + getTitolo() + '\'' +
+                "anno di pubblicazione='" + getAnnoDiPubblicazione() + '\'' +
                 "periodicità=" + periodicità +
                 '}';
     }

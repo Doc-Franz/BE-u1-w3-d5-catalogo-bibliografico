@@ -37,6 +37,8 @@ public class Libro extends ArticoloBibliografico {
     @Override
     public String toString() {
         return "Libro{" +
+                "titolo='" + getTitolo() + '\'' +
+                "anno di pubblicazione='" + getAnnoDiPubblicazione() + '\'' +
                 "autore='" + autore + '\'' +
                 ", genere='" + genere + '\'' +
                 '}';

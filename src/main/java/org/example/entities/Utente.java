@@ -1,9 +1,6 @@
 package org.example.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,22 +10,23 @@ import java.util.List;
 
 public class Utente {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int numeroTessera;
     private String nome;
     private String cognome;
     private LocalDate dataDiNascita;
-    @Column(unique = true)
-    private int numeroTessera;
+
 
     @OneToMany(mappedBy = "utente") // un utente può avere accesso a diversi prestiti
     private List<Prestito> listaPrestiti;
 
     public Utente() {};
 
-    public Utente(String nome, String cognome, LocalDate dataDiNascita, int numeroTessera){
+    public Utente(String nome, String cognome, LocalDate dataDiNascita){
         this.nome = nome;
         this.cognome = cognome;
         this.dataDiNascita = dataDiNascita;
-        this.numeroTessera = numeroTessera;
         this.listaPrestiti = new ArrayList<>();
     }
 
